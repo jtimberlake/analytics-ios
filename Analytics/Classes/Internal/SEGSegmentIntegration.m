@@ -429,7 +429,11 @@ static CTTelephonyNetworkInfo *_telephonyNetworkInfo;
     // attach these parts of the payload outside since they are all synchronous
     // and the timestamp will be more accurate.
     payload[@"type"] = action;
+
+#ifndef ANALYTICS_TIMESTAMP_DISABLED
     payload[@"timestamp"] = iso8601FormattedString([NSDate date]);
+#endif
+
     payload[@"messageId"] = GenerateUUIDString();
 
     [self dispatchBackground:^{
